@@ -7,7 +7,7 @@ const WAVESPEED_DEFAULT_MODEL = "openai/gpt-image-2/edit";
 const POLL_INTERVAL_MS = 1200;
 const POLL_TIMEOUT_MS = 300_000;
 
-export const maxDuration = 360;
+export const maxDuration = 300;
 
 function getClientIp(request: Request) {
   const forwardedFor = request.headers.get("x-forwarded-for");
