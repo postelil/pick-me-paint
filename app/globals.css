@@ -172,11 +172,19 @@ body {
   place-items: start;
 }
 
-.pickme-on-blue {
+.side-actions {
   position: fixed;
   left: clamp(0px, calc(50% + 510px), calc(100vw - 322px));
   top: 50%;
   transform: translateY(-50%);
+  width: 322px;
+  display: grid;
+  gap: 10px;
+  z-index: 999;
+}
+
+.pickme-on-blue,
+.buy-on-blue {
   border: 1px solid #ffffff;
   border-right-color: #404040;
   border-bottom-color: #404040;
@@ -188,10 +196,13 @@ body {
   box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080;
   display: grid;
   place-items: center;
-  z-index: 999;
 }
 
 .pickme-on-blue:active {
+  border-color: #404040 #ffffff #ffffff #404040;
+}
+
+.buy-on-blue:active {
   border-color: #404040 #ffffff #ffffff #404040;
 }
 

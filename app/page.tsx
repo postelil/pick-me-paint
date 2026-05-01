@@ -102,6 +102,8 @@ const TOOLBOX_BUTTONS: Array<{
   { id: "decor-7", label: "◯" },
   { id: "decor-8", label: "▭" }
 ];
+const BUY_PICME_URL =
+  "https://pump.fun/coin/27jeyYQQjBomLopRDKQXSz1YdhMoLpCoxiRSLJGdpump";
 
 function getMouse(canvas: HTMLCanvasElement, event: MouseEvent<HTMLCanvasElement>) {
   const rect = canvas.getBoundingClientRect();
@@ -475,6 +477,10 @@ export default function HomePage() {
     window.open(url, "_blank", "noopener,noreferrer");
   }
 
+  function openBuyPicme() {
+    window.open(BUY_PICME_URL, "_blank", "noopener,noreferrer");
+  }
+
   const canGenerate = mode !== "Idle";
 
   return (
@@ -613,15 +619,20 @@ export default function HomePage() {
         </div>
       </div>
 
-      <button
-        type="button"
-        className={`pickme-on-blue ${mode === "Generating" ? "is-loading" : ""}`}
-        onClick={startGenerate}
+      <div className="side-actions">
+        <button
+          type="button"
+          className={`pickme-on-blue ${mode === "Generating" ? "is-loading" : ""}`}
+          onClick={startGenerate}
           disabled={mode === "Idle" || mode === "Generating" || !canGenerate}
-        title="Pick Me"
-      >
-        {mode === "Generating" ? "Generating..." : "Pick Me ✏️"}
-      </button>
+          title="Pick Me"
+        >
+          {mode === "Generating" ? "Generating..." : "Pick Me ✏️"}
+        </button>
+        <button type="button" className="buy-on-blue" onClick={openBuyPicme} title="Buy $PICME">
+          Buy $PICME
+        </button>
+      </div>
 
       <input
         ref={fileInputRef}
