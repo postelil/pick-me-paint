@@ -1,0 +1,402 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: only light;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+  color: #000000;
+}
+
+.hidden {
+  display: none;
+}
+
+.win95-shell {
+  min-height: 100vh;
+  background: #2b83d6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+.paint-window {
+  width: 992px;
+  height: 744px;
+  background: #c0c0c0;
+  border: 2px solid #ffffff;
+  border-right-color: #404040;
+  border-bottom-color: #404040;
+  box-shadow: 1px 1px 0 #000000;
+  display: grid;
+  grid-template-rows: 24px 22px 1fr 62px 22px;
+  overflow: hidden;
+}
+
+.title-bar {
+  background: linear-gradient(90deg, #0b3c96, #2c7cd6);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.menu-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 8px;
+  border-top: 1px solid #ffffff;
+  border-bottom: 1px solid #808080;
+  background: #c0c0c0;
+}
+
+.menu-item {
+  border: 1px solid transparent;
+  background: transparent;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0 2px;
+  font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+}
+
+.menu-item:hover {
+  border-color: #ffffff #808080 #808080 #ffffff;
+}
+
+.work-area {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 4px;
+  padding: 4px;
+  background: #808080;
+}
+
+.toolbox {
+  background: #c0c0c0;
+  border: 1px solid #ffffff;
+  border-right-color: #404040;
+  border-bottom-color: #404040;
+  padding: 2px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 30px;
+  gap: 2px;
+  align-content: start;
+}
+
+.tool-btn,
+.win95-btn,
+.picme-btn {
+  border: 1px solid #ffffff;
+  border-right-color: #404040;
+  border-bottom-color: #404040;
+  background: #c0c0c0;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+}
+
+.tool-btn.decorative {
+  cursor: default;
+}
+
+.tool-btn.pressed,
+.tool-btn:active,
+.win95-btn:active,
+.picme-btn:active {
+  border-color: #404040 #ffffff #ffffff #404040;
+}
+
+.picme-btn {
+  grid-column: span 2;
+  background: #2fa544;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 11px;
+  height: 34px;
+}
+
+.picme-btn.is-loading {
+  background: #808080;
+}
+
+.picme-btn:disabled {
+  cursor: not-allowed;
+}
+
+.stroke-control {
+  grid-column: span 2;
+  border: 1px solid #808080;
+  margin-top: 1px;
+  padding: 3px;
+  font-size: 11px;
+  grid-row: span 6;
+  height: 126px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-items: start;
+  justify-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.stroke-control .size-slider {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  width: 110px; /* becomes height after rotate */
+  height: 18px;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  transform-origin: center;
+}
+
+.canvas-holder {
+  position: relative;
+  background: #808080;
+  border: 1px solid #ffffff;
+  border-right-color: #404040;
+  border-bottom-color: #404040;
+  overflow: visible;
+  padding: 6px;
+  display: grid;
+  place-items: start;
+}
+
+.pickme-on-blue {
+  position: fixed;
+  left: clamp(0px, calc(50% + 510px), calc(100vw - 322px));
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid #ffffff;
+  border-right-color: #404040;
+  border-bottom-color: #404040;
+  background: #c0c0c0;
+  padding: 4px 6px;
+  width: 322px;
+  height: 64px;
+  cursor: pointer;
+  box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080;
+  display: grid;
+  place-items: center;
+  z-index: 999;
+}
+
+.pickme-on-blue:active {
+  border-color: #404040 #ffffff #ffffff #404040;
+}
+
+.pickme-on-blue.is-loading {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.pickme-on-blue:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.canvas-holder.dragging {
+  outline: 3px dashed #1d5fb8;
+  outline-offset: -8px;
+}
+
+.paint-canvas {
+  display: block;
+  width: 900px;
+  height: 560px;
+  background: #ffffff;
+}
+
+.paper-frame {
+  position: relative;
+  width: 900px;
+  height: 560px;
+  border: 2px solid #ffffff;
+  border-right-color: #404040;
+  border-bottom-color: #404040;
+  background: #ffffff;
+  box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080;
+}
+
+.resize-handle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  right: 1px;
+  bottom: 1px;
+  background: #0000ff;
+}
+
+.upload-overlay {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  width: min(74%, 760px);
+  min-height: 150px;
+  border: 4px dashed #000000;
+  background: #eaeaea;
+  color: #000000;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 14px;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.upload-icon {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.upload-title {
+  margin: 4px 0;
+  font-size: 28px;
+  font-family: var(--font-comic-neue), "Comic Sans MS", cursive;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pickme-rainbow span {
+  display: inline-block;
+  text-shadow: 1px 1px 0 #000000;
+}
+
+.upload-sub {
+  margin: 0;
+  font-size: 20px;
+  font-family: var(--font-comic-neue), "Comic Sans MS", cursive;
+  font-weight: 700;
+}
+
+.bottom-panel {
+  border-top: 1px solid #ffffff;
+  background: #c0c0c0;
+  display: flex;
+  align-items: center;
+  padding: 4px 6px;
+}
+
+.palette-row {
+  display: grid;
+  grid-template-columns: repeat(8, 22px);
+  grid-auto-rows: 22px;
+  gap: 2px;
+  width: auto;
+}
+
+.swatch {
+  width: 22px;
+  height: 22px;
+  border: 1px solid #ffffff;
+  border-right-color: #404040;
+  border-bottom-color: #404040;
+  cursor: pointer;
+  padding: 0;
+}
+
+.swatch.active {
+  border-color: #404040 #ffffff #ffffff #404040;
+}
+
+.action-row {
+  display: flex;
+  gap: 8px;
+}
+
+.bottom-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+}
+
+.pickme-art {
+  display: block;
+  width: 290px;
+  height: 52px;
+  object-fit: contain;
+  border: 2px solid #000000;
+  box-sizing: border-box;
+}
+
+.fake-options {
+  display: flex;
+  gap: 18px;
+  font-family: var(--font-comic-neue), "Comic Sans MS", cursive;
+  font-size: 14px;
+  align-items: center;
+}
+
+.fake-options label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.fake-options input {
+  width: 14px;
+  height: 14px;
+}
+
+.win95-btn {
+  font-size: 14px;
+  padding: 6px 12px;
+}
+
+.status-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: 4px;
+  background: #c0c0c0;
+  border-top: 1px solid #808080;
+  padding: 2px 6px;
+  font-size: 11px;
+}
+
+.status-bar span {
+  border: 1px solid #808080;
+  border-right-color: #ffffff;
+  border-bottom-color: #ffffff;
+  padding: 2px 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 1100px) {
+  .paint-window {
+    transform: scale(0.9);
+    transform-origin: top center;
+  }
+
+  .work-area {
+    grid-template-columns: 52px 1fr;
+  }
+
+  .upload-title {
+    font-size: 32px;
+  }
+
+  .upload-sub {
+    font-size: 24px;
+  }
+
+  .fake-options {
+    font-size: 20px;
+    gap: 12px;
+  }
+}
